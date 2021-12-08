@@ -3,6 +3,7 @@ import {
     GET_LIST_ITEMS_START,
    GET_LIST_ITEMS_SUCCESS,
     GET_LIST_ITEMS_FAIL,
+    DELETE_ITEM
  
 } from './constant';
 import todoApi from '../../api/todoApi';
@@ -34,6 +35,13 @@ export const getItems=()=>async (dispatch)=>{
 export const addItemAction=(payload)=>{
     return ({
         type:ADD_ITEM,
+        payload
+    })
+}
+export const deleteItem = (payload) =>
+{
+    return ({
+        type: DELETE_ITEM,
         payload
     })
 }

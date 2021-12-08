@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import {dispatch} from '../redux/store'
-import { addItemAction, getItems } from '../redux/todoList/actions'
+import { addItemAction, getItems,deleteItem } from '../redux/todoList/actions'
 import { useSelector } from "react-redux";
 
 export default function TodoList()
@@ -38,7 +38,12 @@ export default function TodoList()
 
 export function Home()
 {
-    const {list:{  list, loading, error}} = useSelector(state=>state)
+    const { list: { list, loading, error } } = useSelector(state => state)
+  
+    const handleRemove = (id) =>
+    {
+        dispatch(deleteItem({id:id}))
+    }
     return (
         <div>
                {error?
@@ -47,14 +52,14 @@ export function Home()
                 <>
                     {loading ?
                         <span>Loading...</span> :
-                        list.map(item =>
-                            <div
-
-                                className={'item'} key={item.id}
+                      
+                     (   list.map(item =>
+                            <div className={'item'} key={item.id}
                                >
                                 {item.title}
+                                <button onClick = {()=>handleRemove(item.id)}> Delete </button>
                             </div
-                                >)
+                                >))
                     }
 
                 </>
